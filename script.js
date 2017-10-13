@@ -27,11 +27,15 @@ document.addEventListener("DOMContentLoaded", function () {
 var Shape = /** @class */ (function () {
     function Shape() {
         this.div = document.createElement('div');
-        this.draw('1');
+        this.draw(1000);
     }
     Shape.prototype.draw = function (input) {
+        if (this.type = 'rectangle') {
+            this.div.style.width = input + "px";
+        }
+        else
+            console.log('asdf');
         document.getElementById('container').appendChild(this.div);
-        this.div.style.width = "\"" + input + "px\"";
     };
     return Shape;
 }());

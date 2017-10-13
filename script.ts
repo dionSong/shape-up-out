@@ -31,14 +31,23 @@ document.addEventListener("DOMContentLoaded", function( ) {
 
   class Shape {
       div: HTMLDivElement = document.createElement('div');
+
+      
+      type: string
+
     constructor(){
-        this.draw('1');
+        this.draw(1000);
 
     }
     draw(input): void {
-        document.getElementById('container'). appendChild(this.div);
-        this.div.style.width = `"${input}px"` ; 
-    }
+        if (this.type = 'rectangle'){
+            this.div.style.width = `${input}px`;
+        } else 
+            console.log('asdf');
+
+        document.getElementById('container'). appendChild(this.div); 
+    } 
+
 
  
         
@@ -48,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function( ) {
 }
 
 class Rectangle extends Shape {
-    
+    type: 'rectangle'
     
     constructor(){
         super()
@@ -60,7 +69,7 @@ class Rectangle extends Shape {
 }
 
 class Square extends Shape {
-    
+    type: 'square'
     
     constructor(){
         super()
@@ -71,7 +80,7 @@ class Square extends Shape {
 }
 
 class Circle extends Shape {
-    
+    type: 'circle'
     
     constructor(){
         super()
@@ -82,7 +91,7 @@ class Circle extends Shape {
 }
 
 class Triangle extends Shape {
-    
+    type: 'triangle'
     
     constructor(){
         super()
@@ -100,6 +109,7 @@ let shapeCreator = (type)=>{
         switch(type) {
             case 'rectangle':
                 new Rectangle();
+                
                 break;
             case 'square':
                 new Square();
