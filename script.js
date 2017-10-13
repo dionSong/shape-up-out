@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var SQUARE_BTN = document.getElementById('square-btn');
     var CIRCLE_BTN = document.getElementById('circle-btn');
     var TRIANGLE_BTN = document.getElementById('triangle-btn');
-    RECTANGLE_BTN.addEventListener('click', shapeCreator('rectangle'));
+    RECTANGLE_BTN.addEventListener('click', shapeCreator('rectangle')); //another function that gathers the parameters
     SQUARE_BTN.addEventListener('click', shapeCreator('square'));
     CIRCLE_BTN.addEventListener('click', shapeCreator('circle'));
     TRIANGLE_BTN.addEventListener('click', shapeCreator('triangle'));
@@ -27,14 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
 var Shape = /** @class */ (function () {
     function Shape() {
         this.div = document.createElement('div');
-        this.draw(1000);
+        this.draw();
+        this.div.className = 'shape';
     }
-    Shape.prototype.draw = function (input) {
-        if (this.type = 'rectangle') {
-            this.div.style.width = input + "px";
-        }
-        else
-            console.log('asdf');
+    Shape.prototype.draw = function () {
         document.getElementById('container').appendChild(this.div);
     };
     return Shape;
@@ -44,9 +40,13 @@ var Rectangle = /** @class */ (function (_super) {
     function Rectangle() {
         var _this = _super.call(this) || this;
         _this.div.id = 'rectangle';
-        ;
+        _this.size((document.getElementById('r-width').value), (document.getElementById('r-height').value));
         return _this;
     }
+    Rectangle.prototype.size = function (width, height) {
+        this.div.style.width = width + "px";
+        this.div.style.height = height + "px";
+    };
     return Rectangle;
 }(Shape));
 var Square = /** @class */ (function (_super) {
@@ -54,9 +54,13 @@ var Square = /** @class */ (function (_super) {
     function Square() {
         var _this = _super.call(this) || this;
         _this.div.id = 'square';
-        ;
+        _this.size(document.getElementById('square-input').value);
         return _this;
     }
+    Square.prototype.size = function (sideLength) {
+        this.div.style.height = sideLength + "px";
+        this.div.style.width = sideLength + "px";
+    };
     return Square;
 }(Shape));
 var Circle = /** @class */ (function (_super) {
@@ -64,9 +68,14 @@ var Circle = /** @class */ (function (_super) {
     function Circle() {
         var _this = _super.call(this) || this;
         _this.div.id = 'circle';
-        ;
+        _this.size(document.getElementById('circle-input').value);
         return _this;
     }
+    Circle.prototype.size = function (size) {
+        this.div.style.height = size + "px";
+        this.div.style.width = size + "px";
+        this.div.style.borderRadius = size / 2 + "px";
+    };
     return Circle;
 }(Shape));
 var Triangle = /** @class */ (function (_super) {
@@ -74,9 +83,15 @@ var Triangle = /** @class */ (function (_super) {
     function Triangle() {
         var _this = _super.call(this) || this;
         _this.div.id = 'triangle-right';
-        ;
+        _this.size(document.getElementById('triangle-input').value);
         return _this;
     }
+    Triangle.prototype.size = function (size) {
+        this.div.style.borderBottom = size + "px solid #f1c40f ";
+        this.div.style.borderRight = size + "px solid transparent";
+        // border-bottom: 100px solid #f1c40f
+        // border-right: 100px solid transparent
+    };
     return Triangle;
 }(Shape));
 //Functions

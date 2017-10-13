@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function( ) {
     const TRIANGLE_BTN = document.getElementById('triangle-btn');
 
 
-    RECTANGLE_BTN.addEventListener('click', shapeCreator('rectangle'));
+    RECTANGLE_BTN.addEventListener('click', shapeCreator('rectangle')); //another function that gathers the parameters
 
     SQUARE_BTN.addEventListener('click', shapeCreator('square'));
 
@@ -36,68 +36,75 @@ document.addEventListener("DOMContentLoaded", function( ) {
       type: string
 
     constructor(){
-        this.draw(1000);
+        this.draw();
+        this.div.className = 'shape';   
 
     }
-    draw(input): void {
-        if (this.type = 'rectangle'){
-            this.div.style.width = `${input}px`;
-        } else 
-            console.log('asdf');
-
+    draw(): void {
         document.getElementById('container'). appendChild(this.div); 
     } 
-
-
- 
-        
-    
-    
     //update the panel with that shape metrics
 }
 
 class Rectangle extends Shape {
-    type: 'rectangle'
+
     
     constructor(){
         super()
         this.div.id ='rectangle';
         
+        this.size(((<HTMLInputElement>document.getElementById('r-width')).value), ((<HTMLInputElement>document.getElementById('r-height')).value)) ; 
         
-     ;   
     }
+    size(width, height): void {
+        this.div.style.width = `${width}px`;
+        this.div.style.height = `${height}px`;
+    }
+
+
+
+    //make the click have another function that returns width and heigth values
 }
 
 class Square extends Shape {
-    type: 'square'
     
     constructor(){
         super()
         this.div.id ='square';
-        
-     ;   
+        this.size((<HTMLInputElement>document.getElementById('square-input')).value);
     }
-}
+    size(sideLength): void {
+        this.div.style.height = `${sideLength}px`;
+        this.div.style.width = `${sideLength}px`; 
+    }
+}    
 
 class Circle extends Shape {
-    type: 'circle'
     
     constructor(){
         super()
         this.div.id ='circle';
-        
-     ;   
+        this.size((<HTMLInputElement>document.getElementById('circle-input')).value);  
+    }
+    size(size): void {
+        this.div.style.height = `${size}px`;
+        this.div.style.width = `${size}px`;
+        this.div.style.borderRadius = `${size/2}px`;
     }
 }
 
 class Triangle extends Shape {
-    type: 'triangle'
     
     constructor(){
         super()
-        this.div.id ='triangle-right';
-        
-     ;   
+        this.div.id ='triangle-right'; 
+        this.size((<HTMLInputElement>document.getElementById('triangle-input')).value)
+    }
+    size(size): void {
+        this.div.style.borderBottom = `${size}px solid #f1c40f `;
+        this.div.style.borderRight = `${size}px solid transparent`
+        // border-bottom: 100px solid #f1c40f
+        // border-right: 100px solid transparent
     }
 }
 
@@ -109,6 +116,7 @@ let shapeCreator = (type)=>{
         switch(type) {
             case 'rectangle':
                 new Rectangle();
+                
                 
                 break;
             case 'square':
@@ -122,6 +130,8 @@ let shapeCreator = (type)=>{
         }
     }
 }
+
+
 
 
 

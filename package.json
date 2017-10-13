@@ -1,0 +1,24 @@
+{
+  "name": "shape-up-out",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"tsc --watch script.ts\" \"sass --watch style.sass:style.css\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dionSong/shape-up-out.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dionSong/shape-up-out/issues"
+  },
+  "homepage": "https://github.com/dionSong/shape-up-out#readme",
+  "dependencies": {
+    "concurrently": "^3.5.0"
+  }
+}
