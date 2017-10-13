@@ -5,43 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <label for="Rectangle">
-        <label for="r-width">Width</label>
-            <input id="r-width" type="text" />
-        <label for="r-height">Height</label>
-            <input id="r-height"type="text" />
-            <button id="rectangle-btn">Rectangle</button>
-    </label>
+    <div class="wrapper">
+        <div class="container-1">
+            <label for="Rectangle">
+                <label for="r-width"></label>
+                <button id="rectangle-btn">Rectangle</button>
+                    <input id="r-width" type="text" placeholder="width"/>
+                <label for="r-height"></label>
+                    <input id="r-height"type="text" placeholder="height"/>
+                    
+            </label>
 
-    <label for="Square">
-        <input id="square-input" type="text">
-        <button id="square-btn">Square</button>
-    </label>
+            <label for="Square">
+                <button id="square-btn">Square</button>
+                <input id="square-input" type="text" placeholder="size">
+            </label>
 
-    <label for="Circle">
-        <input id="circle-input"type="text">
-        <button id="circle-btn">Circle</button>    
-    </label>
+            <label for="Circle">
+                <button id="circle-btn">Circle</button>  
+                <input id="circle-input"type="text" placeholder="Radius">  
+            </label>
 
-    <label for="Isoceles Right Triangle">
-        <input id= "triangle-input" type="text">
-        <button id="triangle-btn">Isoceles Triangle</button>        
-    </label>
+            <label for="Isoceles Right Triangle">
+                <button id="triangle-btn">Isoceles Triangle</button>    
+                <input id= "triangle-input" type="text" placeholder="size">      
+            </label>
+        </div>
+        <div id = "container"><!--dont touch!-->
 
-    <div id = "container">
+        </div>
 
+      
     </div>
-
-    <div id="side-panel">
-
-    </div>
-
     
 
-
+    
     <script src="script.js"></script>
 </body>
 </html>
