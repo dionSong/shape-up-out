@@ -9,21 +9,15 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 document.addEventListener("DOMContentLoaded", function () {
-    // * Each of the insert buttons above should create a new instance of that particular shape, which should draw itself on the screen with the specified size and placed in a random location (object details are below)
     var RECTANGLE_BTN = document.getElementById('rectangle-btn');
     var SQUARE_BTN = document.getElementById('square-btn');
     var CIRCLE_BTN = document.getElementById('circle-btn');
     var TRIANGLE_BTN = document.getElementById('triangle-btn');
-    RECTANGLE_BTN.addEventListener('click', shapeCreator('rectangle')); //another function that gathers the parameters
+    RECTANGLE_BTN.addEventListener('click', shapeCreator('rectangle'));
     SQUARE_BTN.addEventListener('click', shapeCreator('square'));
     CIRCLE_BTN.addEventListener('click', shapeCreator('circle'));
     TRIANGLE_BTN.addEventListener('click', shapeCreator('triangle'));
-    //get each button by id and on click Each of the insert buttons above should create a new instance of that particular shape, which should draw itself on the screen with the specified size and placed in a random location (object details are below)
 });
-// * Rectangle: Inputs for width and height, and an insert button
-// * Square: Input for side length and an insert button
-// * Circle: Input for radius and an insert button
-// * Isoceles Right Triangle: Input for height and an insert button
 var Shape = /** @class */ (function () {
     function Shape() {
         var _this = this;
@@ -32,6 +26,32 @@ var Shape = /** @class */ (function () {
         this.div.className = 'shape';
         this.div.addEventListener('dblclick', function () {
             _this.div.remove();
+        });
+        this.div.addEventListener('click', function () {
+            var shapeName = document.getElementById('shape-name');
+            var width = document.getElementById('width');
+            var height = document.getElementById('height');
+            var radius = document.getElementById('radius');
+            var area = document.getElementById('area');
+            var perimeter = document.getElementById('perimeter');
+            shapeName.innerHTML = "Shape Name: " + _this.type;
+            width.innerHTML = "Width: " + _this.div.style.width;
+            height.innerHTML = "Height: " + _this.div.style.height;
+            radius.innerHTML = "Radius: " + _this.div.style.borderRadius;
+            //Area and perimeer
+            if (_this.type === 'Rectangle' || _this.type === 'Square') {
+                area.innerHTML = "Area: " + parseInt(_this.div.style.width) * parseInt(_this.div.style.height);
+                perimeter.innerHTML = "Perimeter: " + parseInt(_this.div.style.width) * 4;
+            }
+            else if (_this.type === 'Circle') {
+                area.innerHTML = "Area: " + Math.pow(parseInt(_this.div.style.borderRadius), 2) * 3.14;
+                perimeter.innerHTML = "Perimeter: " + 2 * 3.14 * parseInt(_this.div.style.borderRadius);
+            }
+            else if (_this.type === 'Triangle') {
+                height.innerHTML = "Height: " + parseInt(_this.div.style.borderRight);
+                area.innerHTML = "Area: " + (parseInt(_this.div.style.borderBottom) * parseInt(_this.div.style.borderRight)) * 0.5;
+                perimeter.innerHTML = "Perimeter: " + 2 * parseInt(_this.div.style.borderRight) * Math.pow(parseInt(_this.div.style.borderRight) * parseInt(_this.div.style.borderRight), 2);
+            }
         });
     }
     Shape.prototype.draw = function () {
@@ -46,6 +66,7 @@ var Rectangle = /** @class */ (function (_super) {
     function Rectangle() {
         var _this = _super.call(this) || this;
         _this.div.id = 'rectangle';
+        _this.type = 'Rectangle';
         _this.size((document.getElementById('r-width').value), (document.getElementById('r-height').value));
         return _this;
     }
@@ -60,6 +81,7 @@ var Square = /** @class */ (function (_super) {
     function Square() {
         var _this = _super.call(this) || this;
         _this.div.id = 'square';
+        _this.type = 'Square';
         _this.size(document.getElementById('square-input').value);
         return _this;
     }
@@ -74,6 +96,7 @@ var Circle = /** @class */ (function (_super) {
     function Circle() {
         var _this = _super.call(this) || this;
         _this.div.id = 'circle';
+        _this.type = 'Circle';
         _this.size(document.getElementById('circle-input').value);
         return _this;
     }
@@ -89,6 +112,7 @@ var Triangle = /** @class */ (function (_super) {
     function Triangle() {
         var _this = _super.call(this) || this;
         _this.div.id = 'triangle-right';
+        _this.type = 'Triangle';
         _this.size(document.getElementById('triangle-input').value);
         return _this;
     }
@@ -134,5 +158,4 @@ var randomNumberTwo = function () {
 // * Clicking on any shape should call a method named describe(), which should update the statistics in the sidepanel in index.html
 // * Remember that a circle's perimeter is the same as its circumference
 // ## Hints/Resources
-// * Triangle area: `0.5 * base * height`
 // * Triangle perimeter (right isoceles): `2 * height * square root of (2 * height * height)` 

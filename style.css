@@ -56,4 +56,8 @@ input {
   position: relative;
   left: 32%; }
 
+.side-panel {
+  margin-top: 50px;
+  margin-left: 20px; }
+
 /*# sourceMappingURL=style.css.map */

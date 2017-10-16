@@ -3,33 +3,22 @@
 
 
 document.addEventListener("DOMContentLoaded", function( ) {
-// * Each of the insert buttons above should create a new instance of that particular shape, which should draw itself on the screen with the specified size and placed in a random location (object details are below)
+
     const RECTANGLE_BTN = document.getElementById('rectangle-btn');
     const SQUARE_BTN = document.getElementById('square-btn');
     const CIRCLE_BTN = document.getElementById('circle-btn');
     const TRIANGLE_BTN = document.getElementById('triangle-btn');
 
 
-    RECTANGLE_BTN.addEventListener('click', shapeCreator('rectangle')); //another function that gathers the parameters
+    RECTANGLE_BTN.addEventListener('click', shapeCreator('rectangle')); 
 
     SQUARE_BTN.addEventListener('click', shapeCreator('square'));
 
     CIRCLE_BTN.addEventListener('click', shapeCreator('circle'));
 
     TRIANGLE_BTN.addEventListener('click',shapeCreator('triangle'))
-    //get each button by id and on click Each of the insert buttons above should create a new instance of that particular shape, which should draw itself on the screen with the specified size and placed in a random location (object details are below)
-  
-
-
   });
 
-  // * Rectangle: Inputs for width and height, and an insert button
-
-// * Square: Input for side length and an insert button
-
-// * Circle: Input for radius and an insert button
-
-// * Isoceles Right Triangle: Input for height and an insert button
 
   class Shape {
       div: HTMLDivElement = document.createElement('div');
@@ -41,25 +30,46 @@ document.addEventListener("DOMContentLoaded", function( ) {
         this.div.className = 'shape';  
         this.div.addEventListener('dblclick', () => {
             this.div.remove(); 
-        });
-        
+            });
+        this.div.addEventListener('click', () => {
+            let shapeName = document.getElementById('shape-name');
+            let width = document.getElementById('width');
+            let height = document.getElementById('height');
+            let radius = document.getElementById('radius');
+            let area = document.getElementById('area');
+            let perimeter =document.getElementById('perimeter');
+
+            shapeName.innerHTML = `Shape Name: ${this.type}`;
+            width.innerHTML = `Width: ${this.div.style.width}`;
+            height.innerHTML = `Height: ${this.div.style.height}`;
+            radius.innerHTML = `Radius: ${this.div.style.borderRadius}`;
+
+            //Area and perimeer
+            if (this.type === 'Rectangle' || this.type === 'Square'){
+                area.innerHTML = `Area: ${parseInt(this.div.style.width) * parseInt(this.div.style.height)}`;
+                perimeter.innerHTML = `Perimeter: ${parseInt(this.div.style.width) * 4}`;
+            } else if (this.type === 'Circle'){
+                area.innerHTML = `Area: ${Math.pow(parseInt(this.div.style.borderRadius), 2) * 3.14}`
+                perimeter.innerHTML = `Perimeter: ${2 * 3.14 * parseInt(this.div.style.borderRadius)}`
+            } else if (this.type === 'Triangle'){
+                height.innerHTML = `Height: ${parseInt(this.div.style.borderRight)}`;
+                area.innerHTML = `Area: ${(parseInt(this.div.style.borderBottom) * parseInt(this.div.style.borderRight)) * 0.5 }`;
+                perimeter.innerHTML = `Perimeter: ${2 * parseInt(this.div.style.borderRight) * Math.pow(parseInt(this.div.style.borderRight) * parseInt(this.div.style.borderRight), 2)}`
+            }    
+        })
     }
     draw(): void {
         this.div.style.top = `${randomNumberOne()}px` //top should be between 1 to 475
         this.div.style.left = `${randomNumberTwo()}px` //left should be between 453 to 916
         document.getElementById('container').appendChild(this.div); 
     } 
-
-
-    //update the panel with that shape metrics
 }
 
 class Rectangle extends Shape {
-
-    
     constructor(){
         super()
         this.div.id ='rectangle';
+        this.type = 'Rectangle'
         
         this.size(((<HTMLInputElement>document.getElementById('r-width')).value), ((<HTMLInputElement>document.getElementById('r-height')).value)) ; 
     }
@@ -70,10 +80,10 @@ class Rectangle extends Shape {
 }
 
 class Square extends Shape {
-    
     constructor(){
         super()
         this.div.id ='square';
+        this.type = 'Square'
         this.size((<HTMLInputElement>document.getElementById('square-input')).value);
     }
     size(sideLength): void {
@@ -83,10 +93,10 @@ class Square extends Shape {
 }    
 
 class Circle extends Shape {
-    
     constructor(){
         super()
         this.div.id ='circle';
+        this.type = 'Circle'
         this.size((<HTMLInputElement>document.getElementById('circle-input')).value);  
     }
     size(size): void {
@@ -97,15 +107,15 @@ class Circle extends Shape {
 }
 
 class Triangle extends Shape {
-    
     constructor(){
         super()
         this.div.id ='triangle-right'; 
+        this.type = 'Triangle'
         this.size((<HTMLInputElement>document.getElementById('triangle-input')).value)
     }
     size(size): void {
         this.div.style.borderBottom = `${size}px solid #f1c40f `;
-        this.div.style.borderRight = `${size}px solid transparent`
+        this.div.style.borderRight = `${size}px solid transparent`;
     }
 }
 
@@ -117,8 +127,6 @@ let shapeCreator = (type)=>{
         switch(type) {
             case 'rectangle':
                 new Rectangle();
-                
-                
                 break;
             case 'square':
                 new Square();
@@ -180,6 +188,5 @@ let randomNumberTwo = (): any => {
 // ## Hints/Resources
 
 
-// * Triangle area: `0.5 * base * height`
 
 // * Triangle perimeter (right isoceles): `2 * height * square root of (2 * height * height)`
